@@ -2,12 +2,6 @@ version = 1
 revision = 3
 requires-python = ">=3.11"
 
-[manifest]
-members = [
-    "exps2025",
-    "face-exp",
-]
-
 [[package]]
 name = "exps2025"
 version = "0.1.0"
@@ -18,11 +12,6 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [{ name = "pygame", specifier = ">=2.6.1" }]
-
-[[package]]
-name = "face-exp"
-version = "0.1.0"
-source = { virtual = "face_exp" }
 
 [[package]]
 name = "pygame"

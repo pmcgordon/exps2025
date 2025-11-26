@@ -4,11 +4,18 @@ import pygame
 import time
 import csv
 
+# Locate the face_exp directory relative to this script's location
+script_dir = os.path.dirname(os.path.abspath(__file__))
+if os.path.basename(script_dir) == 'face_exp':
+    face_exp_dir = script_dir
+else:
+    # Script is in root; find face_exp subdirectory
+    face_exp_dir = os.path.join(script_dir, 'face_exp')
+
 def get_image_files():
-    # Get paths to image directories
-    current_dir = os.getcwd()
-    different_dir = os.path.join(current_dir, 'jpeg', 'different')
-    same_dir = os.path.join(current_dir, 'jpeg', 'same')
+    # Get paths to image directories relative to face_exp
+    different_dir = os.path.join(face_exp_dir, 'jpeg', 'different')
+    same_dir = os.path.join(face_exp_dir, 'jpeg', 'same')
 
     # Get all jpeg files and attach folder code
     # Folder code: 1 = same, 0 = different (per user request)
@@ -72,11 +79,12 @@ def display_images(image_files):
     return results
 
 def write_results(results):
-    # Create data directory if it doesn't exist
-    os.makedirs('data', exist_ok=True)
+    # Create data directory inside face_exp if it doesn't exist
+    data_dir = os.path.join(face_exp_dir, 'data')
+    os.makedirs(data_dir, exist_ok=True)
 
     # Write results to CSV
-    csv_path = os.path.join('data', 'test.csv')
+    csv_path = os.path.join(data_dir, 'test.csv')
     with open(csv_path, 'w', newline='') as f:
         writer = csv.writer(f)
         # Header: Image, Folder (1=same,0=different), Response (1='/',0='z')
